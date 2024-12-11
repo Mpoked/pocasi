@@ -7,7 +7,7 @@
         $table->setHeading('ID', "Název", "Zkratka");
 
         foreach($bundesland as $row) {
-            $table->addRow($row->id, $row->name, $row->short_name);
+            $table->addRow($row->id, anchor("zeme/".$row->id, $row->name), $row->short_name);
         }
 
         $template = array(
