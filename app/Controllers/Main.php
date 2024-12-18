@@ -17,11 +17,30 @@ class Main extends BaseController
     public function __construct() //konstruktor
     {
         $this->bundesland = new bundesland();
+        $this->station = new station();
+        $this->data = new data(); 
     }
     public function index()
     {
-        $index = $this->bundesland->findAll(); //$polaci jsou kde to budeme ukladat, this hraci a where se dostavame do databaze a pak si vybereme co vyhledat a všechno
-        $data["bundesland"] = $index; //získáme do jednoho atributu všechny údaje (ascending)
+        $index = $this->bundesland->findAll();
+        $data["bundesland"] = $index; 
         echo view("index", $data); ;
+    }
+
+    public function zeme($id){
+       $zeme = $this->bundesland->find($id);
+       $stanice = $this->station->where('bundesland', $id)->findAll();
+       $data["stanice"] = $stanice; //vypíše informace na stanice
+       $data["bundesland"] = $zeme; //název země
+       echo view("zeme", $data);
+    } 
+
+    public function data($id){
+        
+       $zeme = $this->station->find($id);
+        $pocasi_data = $this->data->where("Stations_ID", $id)->findAll();
+        $data["zeme"] = $zeme;
+        $data["udaje"] = $pocasi_data;
+        echo view("data", $data);
     }
 }
