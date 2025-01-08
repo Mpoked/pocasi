@@ -4,10 +4,10 @@
     <div class="col-6">
         <?php
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('ID', "Název", "Zkratka");
+        $table->setHeading('ID', "Název", "Zkratka", "Další Informace");
 
         foreach($bundesland as $row) {
-            $table->addRow($row->id, anchor("zeme/".$row->id, $row->name), $row->short_name);
+            $table->addRow($row->id, anchor("zeme/".$row->id, $row->name), $row->short_name, anchor("info/".$row->id, "informace"));
         }
 
         $template = array(

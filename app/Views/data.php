@@ -2,13 +2,16 @@
 <?= $this->section("content") ?>
 
 <div class="row pt-3">
-    <div class="col-6">
+    <div class="offset-2 col-6">
+        <h1><?= $zeme->place ?></h1>
         <?php
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading( "Minimální teplota", "Maximální teplota", "Vlhkost");
+        $table->setHeading( "Minimální teplota", "Maximální teplota", "Vlhkost", "průměrný tlak vzduchu", "datum");
 
         foreach($udaje as $row) {
-            $table->addRow( $row->min_2m, $row->max_2m, $row->humidity);
+            $datum = strtotime($row->date);
+            $datum = date("j.n.Y", $datum);
+            $table->addRow( $row->min_2m, $row->max_2m, $row->humidity, $row->mid_air_pressure, $datum);
         }
 
         $template = array(

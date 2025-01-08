@@ -43,4 +43,16 @@ class Main extends BaseController
         $data["udaje"] = $pocasi_data;
         echo view("data", $data);
     }
+
+    public function info($id){
+        $zeme = $this->bundesland->find($id);
+        $data["zeme"] = $zeme;
+        echo view("info", $data);
+    }
+
+    public function prehled(){
+        $info = $this->bundesland->join("station", "bundesland.id = station.bundesland", "inner")->findAll();
+
+    }
 }
+
