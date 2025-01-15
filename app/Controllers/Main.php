@@ -51,7 +51,11 @@ class Main extends BaseController
     }
 
     public function prehled(){
-        $info = $this->bundesland->join("station", "bundesland.id = station.bundesland", "inner")->findAll();
+        $info = $this->bundesland->join("station", "bundesland.id = station.bundesland", "inner")->orderBy("place")->paginate(25);
+        $pager = $this->bundesland->pager;
+        $data["pager"] = $pager;
+        $data["prehled"] = $info;
+        echo view("prehled", $data);
 
     }
 }
