@@ -6,12 +6,12 @@
         <h1><?= $zeme->place ?></h1>
         <?php
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading( "Minimální teplota", "Maximální teplota", "Vlhkost", "průměrný tlak vzduchu", "datum");
+        $table->setHeading( "Minimální teplota", "Maximální teplota", "průměrná teplota", "průměrný tlak vzduchu", "datum");
 
         foreach($udaje as $row) {
             $datum = strtotime($row->date);
             $datum = date("j.n.Y", $datum);
-            $table->addRow( $row->min_2m, $row->max_2m, $row->humidity, $row->mid_air_pressure, $datum);
+            $table->addRow( $row->min_2m, $row->max_2m, $row->mid_2m, $row->mid_air_pressure, $datum);
         }
 
         $template = array(
